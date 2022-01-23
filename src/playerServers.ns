@@ -101,7 +101,7 @@ export async function main(ns) {
     let purchasedServers = getPurchasedServers(ns)
 
     let action = purchasedServers.length < settings.maxPlayerServers ? settings.actions.BUY : settings.actions.UPGRADE
-    print(action)
+    ns.print(action)
     if (action == settings.actions.BUY) {
       let smallestCurrentServer = purchasedServers.length ? ns.getServerRam(purchasedServers[0]).shift() : 0
       let targetRam = Math.max(settings.minGbRam, smallestCurrentServer)
@@ -132,7 +132,7 @@ export async function main(ns) {
       let smallestCurrentServer = Math.max(ns.getServerRam(purchasedServers[0]).shift(), settings.minGbRam)
       let biggestCurrentServer = ns.getServerRam(purchasedServers[purchasedServers.length - 1]).shift()
       let targetRam = smallestCurrentServer*2
-      print(targetRam)
+      ns.print(targetRam)
       if (smallestCurrentServer === settings.maxGbRam) {
         ns.tprint(`[${localeHHMMSS()}] All servers maxxed. Exiting.`)
         ns.exit()

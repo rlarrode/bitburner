@@ -6,7 +6,7 @@ const settings = {
   minSecurityLevelOffset: 1,
   maxMoneyMultiplayer: 0.9,
   minSecurityWeight: 100,
-  minHackChance: 0.9,
+  minHackChance: 10,
   mapRefreshInterval: 24 * 60 * 60 * 1000,
   maxWeakenTime: 30 * 60 * 1000,
   keys: {
@@ -124,7 +124,7 @@ function findTargetServer(ns, serversList, servers, serverExtraData) {
     .filter((hostname) => servers[hostname].maxMoney)
     .filter((hostname) => hostname !== 'home')
     .filter((hostname) => ns.getWeakenTime(hostname) < settings.maxWeakenTime)
-    .filter((hostname) => ns.hackAnalyzeChance(hostname) < settings.minHackChance)
+    .filter((hostname) => ns.hackAnalyzeChance(hostname) > settings.minHackChance)
 
   let weightedServers = serversList.map((hostname) => {
     const fullHackCycles = Math.ceil(100 / Math.max(0.00000001, ns.hackAnalyze(hostname)))

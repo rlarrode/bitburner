@@ -134,7 +134,7 @@ function findTargetServer(ns, serversList, servers, serverExtraData) {
     }
 
     const serverValue = servers[hostname].maxMoney * (settings.minSecurityWeight / (servers[hostname].minSecurityLevel + ns.getServerSecurityLevel(hostname)))
-
+    ns.tprint(`Hackchance: ${ns.hackAnalyzeChance(hostname)}`)
     return {
       hostname,
       serverValue,

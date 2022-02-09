@@ -7,7 +7,7 @@ const settings = {
   mawSecurityLevel: 50,
   maxMoneyMultiplayer: 0.9,
   minSecurityWeight: 100,
-  minHackChance: 0.1,
+  minHackChance: -1,
   mapRefreshInterval: 24 * 60 * 60 * 1000,
   maxWeakenTime: 30 * 60 * 1000,
   keys: {
@@ -275,7 +275,7 @@ export async function main(ns) {
           const r = await ns.exec('grow.ns', server.host, cyclesToRun, bestTarget, cyclesToRun, growDelay, createUUID())
           growCycles -= cyclesToRun
           cyclesFittable -= cyclesToRun
-          if (r == 1){
+          if (r == 1 && False){
             growCycles = 0;
             cyclesFittable = 0;
             action = 'hack';

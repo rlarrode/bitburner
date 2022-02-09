@@ -275,7 +275,7 @@ export async function main(ns) {
           const r = await ns.exec('grow.ns', server.host, cyclesToRun, bestTarget, cyclesToRun, growDelay, createUUID())
           growCycles -= cyclesToRun
           cyclesFittable -= cyclesToRun
-          if (r == 0){
+          if (r == 1){
             growCycles = 0;
             cyclesFittable = 0;
             action = 'hack';

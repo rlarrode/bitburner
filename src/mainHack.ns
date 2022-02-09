@@ -4,6 +4,7 @@ const settings = {
   homeRamExtraRamReserved: 12,
   homeRamBigMode: 64,
   minSecurityLevelOffset: 1,
+  mawSecurityLevel: 50,
   maxMoneyMultiplayer: 0.9,
   minSecurityWeight: 100,
   minHackChance: 0.1,
@@ -134,7 +135,6 @@ function findTargetServer(ns, serversList, servers, serverExtraData) {
     }
 
     const serverValue = servers[hostname].maxMoney * (settings.minSecurityWeight / (servers[hostname].minSecurityLevel + ns.getServerSecurityLevel(hostname)))
-    ns.tprint(`Hackchance: ${ns.hackAnalyzeChance(hostname)}`)
     return {
       hostname,
       serverValue,
@@ -189,7 +189,10 @@ export async function main(ns) {
     const money = ns.getServerMoneyAvailable(bestTarget)
 
     let action = 'weaken'
+    ns.tprint(`Current Security: ${securityLevel}, maxSecurityAllowed: ${serverMap.servers[bestTarget].minSecurityLevel}`)
     if (securityLevel > serverMap.servers[bestTarget].minSecurityLevel + settings.minSecurityLevelOffset) {
+      action = 'weaken'
+    } else if (securityLevel > settings.maxSecurityLeve){
       action = 'weaken'
     } else if (money < serverMap.servers[bestTarget].maxMoney * settings.maxMoneyMultiplayer) {
       action = 'grow'
